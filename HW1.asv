@@ -35,10 +35,11 @@ disp(answer)
 N = 10; % define sequence length
 
 rand_seq = randi(4,[1,N])
+rand_seq = {rand_seq}
 
 ii = 1;
 while ii < N
-    switch rand_seq(1,ii);
+    switch rand_seq{1,ii)
         case 1
             disp ('1')
             rand_seq(1,ii) = 'A'
@@ -54,7 +55,6 @@ while ii < N
     end
     ii = ii+1;
 end
-rand_seq = num2str(rand_seq)
 disp('end')
 
 %part 2: open reading frames (ORFs) are pieces of DNA that can be
