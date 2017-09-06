@@ -31,68 +31,35 @@ disp(answer)
 % called rand_seq. Hint: the function randi may be useful. 
 % Even if you have access to the bioinformatics toolbox, 
 % do not use the builtin function randseq for this part. 
+clear all
+N = ; % define sequence length
 
-% Homework 1. Due before class on 9/5/17
+randNum_seq = randi(4,[1,N])
 
-%% Problem 1 - addition with strings
-
-% Fill in the blank space in this section with code that will add 
-% the two numbers regardless of variable type. Hint see the matlab
-% functions ischar, isnumeric, and str2num. 
-
-%your code should work no matter which of these lines is uncommented. 
-%x = 3; y = 5; % integers
-%x = '3'; y= '5'; %strings
- x = 3; y = '5'; %mixed
-
-%your code goes here
-if isnumeric(x) == false
-    x = str2num(x);
-end
-if isnumeric(y) == false
-    y = str2num(y);
-end
-%output your answer
-answer = x+y;
-disp(answer)
-
-%% Problem 2 - our first real biology problem. Open reading frames and nested loops.
-
-%part 1: write a piece of code that creates a random DNA sequence of length
-% N (i.e. consisting of the letters ATGC) where we will start with 
-% N=500 base pairs (b.p.).
-% store the output in a variable
-% called rand_seq. Hint: the function randi may be useful. 
-% Even if you have access to the bioinformatics toolbox, 
-% do not use the builtin function randseq for this part. 
-
-N =10; % define sequence length
-
-rand_seq = randi(4,[1,N])
-rand_seq = num2str(rand_seq)
-
-ii = 1;
+ii = 0;
 while ii < N
-    switch rand_seq(1,ii)
-        case '1'
-            disp (['Iteration ' num2str(ii)]);
-            rand_seq(1,ii) = 'A'
-            ii = ii+1
-        case '2'
-            disp (['Iteration ' num2str(ii)]);
-            rand_seq(1,ii )= 'T'
-            ii = ii+1
-        case '3'
-            disp (['Iteration ' num2str(ii)]);
-            rand_seq(1,ii) = 'C'
-            ii = ii+1
-        case '4'
-            disp (['Iteration ' num2str(ii)]);
-            rand_seq(1,ii) = 'G'
-            ii = ii+1
+    ii = ii+1;
+    switch randNum_seq(ii)
+        case 1
+            %disp (['Iteration A+' num2str(ii)]);
+            rand_seq(1,ii) = 'A';
+        case 2
+            %disp (['Iteration T+' num2str(ii)]);
+            rand_seq(1,ii )= 'T';
+        case 3
+            %disp (['Iteration C+' num2str(ii)]);
+            rand_seq(1,ii) = 'C';
+        case 4
+            %disp (['Iteration G+' num2str(ii)]);
+            rand_seq(1,ii) = 'G';
     end
+
 end
+disp(rand_seq)
 disp('end')
+%%
+
+
 
 %part 2: open reading frames (ORFs) are pieces of DNA that can be
 % transcribed and translated. They start with a start codon (ATG) and end with a
