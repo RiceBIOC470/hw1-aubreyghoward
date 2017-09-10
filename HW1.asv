@@ -21,6 +21,7 @@ end
 %output your answer
 answer = x+y;
 disp(answer)
+disp ('Terminated Analysis')%Aids in reading Command window runs.
 
 %% Problem 2 - our first real biology problem. Open reading frames and nested loops.
 
@@ -53,7 +54,7 @@ while ii < N
 
 end
 disp(rand_seq)
-disp('end')
+disp ('Terminated Analysis')%Aids in reading Command window runs.
 %%
 
 %part 2: open reading frames (ORFs) are pieces of DNA that can be
@@ -61,34 +62,194 @@ disp('end')
 % stop codon (TAA, TGA, or TAG). Write a piece of code that finds the longest ORF 
 % in your seqeunce rand_seq. Hint: see the function strfind.
 
-StartCodon = ['ATG'];
-StopCodon = ['TAA','TGA','TAG'];
-StopCodon1 = ['TAA'];
-StopCodon2 = ['TGA'];
-StopCodon3 = ['TAG'];
+StartCodon = ['ATG'];% Defines starting codon text
+StopCodon1 = ['TAA'];% Defines Stopping codon text
+StopCodon2 = ['TGA'];% Defines Stopping codon text
+StopCodon3 = ['TAG'];% Defines Stopping codon text
 
-Start = strfind(rand_seq,StartCodon);
-Stop1 = strfind(rand_seq,StopCodon1);
-Stop2 = strfind(rand_seq,StopCodon2);
-Stop3 = strfind(rand_seq,StopCodon3);
+Start = strfind(rand_seq,StartCodon); %returns an array of all Start codons
+Stop1 = strfind(rand_seq,StopCodon1); %returns an array of all stop codons for TAA
+Stop2 = strfind(rand_seq,StopCodon2); %returns an array of all stop codons for TGA
+Stop3 = strfind(rand_seq,StopCodon3); %returns an array of all stop codons for TAG
+Stop = [Stop1,Stop2,Stop3]; Stop = sort(Stop)%stop codon listed in numerical order 
 
-Stop = [Stop1,Stop2,Stop3];
-Stop = sort(Stop);
+q = 1;
+DistMax = -1;
 
-
-
+while q<=length(Start)
+    checkdist = Stop-Start(1,q); %checks distance between every stop and 1 element of start
+    p = 1;
+    for ii = 1:length(checkdist) %finds the first, therefore shortest, 
+                                 %positive distance. 
+                                 %All subsequent distances will be
+                                 %terminated by this first distance.
+        if sign(checkdist(1,p)) == 1
+            ArrayMax = checkdist(1,p)
+            break
+            break
+        else
+            p = p+1;
+        end
+    end
+        
+    if ArrayMax > DistMax %Saves only the longest distance. 
+        DistMax = ArrayMax 
+    end
+    q = q+1 %Counter
+end
+DistMax
+disp ('Terminated Analysis') %Aids in reading Command window runs.
 
 %%
-
-
 %part 3: copy your code in parts 1 and 2 but place it inside a loop that
 % runs 1000 times. Use this to determine the probability
 % that an sequence of length 500 has an ORF of greater than 50 b.p.
+clear all
+RunNumber = 1000000;
+probmat = 0;
 
+for z = 1:RunNumber
+    
+N = 500; % define sequence length
+randNum_seq = randi(4,[1,N]); %generates an array of numbers 1-4.
+%this will correspond to each of the 4 nucleotide bases.
+
+ii = 0;
+while ii < N
+    ii = ii+1;% counter starts/increases
+    switch randNum_seq(ii)
+        case 1
+            rand_seq(1,ii) = 'A';
+        case 2
+            rand_seq(1,ii )= 'T';
+        case 3
+            rand_seq(1,ii) = 'C';
+        case 4
+            rand_seq(1,ii) = 'G';
+    end
+end %Generates the random DNA sequence
+
+StartCodon = ['ATG'];% Defines starting codon text
+StopCodon1 = ['TAA'];% Defines Stopping codon text
+StopCodon2 = ['TGA'];% Defines Stopping codon text
+StopCodon3 = ['TAG'];% Defines Stopping codon text
+Start = strfind(rand_seq,StartCodon); %returns an array of all Start codons
+Stop1 = strfind(rand_seq,StopCodon1); %returns an array of all stop codons for TAA
+Stop2 = strfind(rand_seq,StopCodon2); %returns an array of all stop codons for TGA
+Stop3 = strfind(rand_seq,StopCodon3); %returns an array of all stop codons for TAG
+Stop = [Stop1,Stop2,Stop3]; Stop = sort(Stop);%stop codon listed in numerical order 
+
+q = 1;
+DistMax = -1;
+
+while q<=length(Start)
+    checkdist = Stop-Start(1,q); %checks distance between every stop and 1 element of start
+    p = 1;
+    for ii = 1:length(checkdist) %finds the first, therefore shortest, 
+                                 %positive distance. 
+                                 %All subsequent distances will be
+                                 %terminated by this first distance.
+        if sign(checkdist(1,p)) == 1
+            ArrayMax = checkdist(1,p);
+            break
+            break
+        else
+            p = p+1;
+        end
+    end
+        
+    if ArrayMax > DistMax %Saves only the longest distance. 
+        DistMax = ArrayMax ;
+    end
+    q = q+1; %Counter
+end %Finds the max ORF distance
+
+if DistMax >= 50 %finds the number of distances > than 50bp
+    probmat = probmat+1;
+end
+
+end
+probmat/RunNumber;
+
+disp('the probability is:')
+disp(probmat/RunNumber)
+
+disp ('Terminated Analysis') %Aids in reading Command window runs.
+%%
 %part 4: copy your code from part 3 but put it inside yet another loop,
 % this time over the sequence length N. Plot the probability of having an
-% ORF > 50 b.p. as a funciton of the sequence length. 
+% ORF > 50 b.p. as a funciton of the sequence length.
+clear all
+RunNumber = 1000;
+probmat = 0;
+N = 10000; % define sequence length
 
+for iii = 1:N
+for z = 1:RunNumber
+    e
+randNum_seq = randi(4,[1,N]); %generates an array of numbers 1-4.
+%this will correspond to each of the 4 nucleotide bases.
+
+ii = 0;
+while ii < N
+    ii = ii+1;% counter starts/increases
+    switch randNum_seq(ii)
+        case 1
+            rand_seq(1,ii) = 'A';
+        case 2
+            rand_seq(1,ii )= 'T';
+        case 3
+            rand_seq(1,ii) = 'C';
+        case 4
+            rand_seq(1,ii) = 'G';
+    end
+end %Generates the random DNA sequence
+
+StartCodon = ['ATG'];% Defines starting codon text
+StopCodon1 = ['TAA'];% Defines Stopping codon text
+StopCodon2 = ['TGA'];% Defines Stopping codon text
+StopCodon3 = ['TAG'];% Defines Stopping codon text
+Start = strfind(rand_seq,StartCodon); %returns an array of all Start codons
+Stop1 = strfind(rand_seq,StopCodon1); %returns an array of all stop codons for TAA
+Stop2 = strfind(rand_seq,StopCodon2); %returns an array of all stop codons for TGA
+Stop3 = strfind(rand_seq,StopCodon3); %returns an array of all stop codons for TAG
+Stop = [Stop1,Stop2,Stop3]; Stop = sort(Stop);%stop codon listed in numerical order 
+
+q = 1;
+DistMax = -1;
+
+while q<=length(Start)
+    checkdist = Stop-Start(1,q); %checks distance between every stop and 1 element of start
+    p = 1;
+    for ii = 1:length(checkdist) %finds the first, therefore shortest, 
+                                 %positive distance. 
+                                 %All subsequent distances will be
+                                 %terminated by this first distance.
+        if sign(checkdist(1,p)) == 1
+            ArrayMax = checkdist(1,p);
+            break
+            break
+        else
+            p = p+1;
+        end
+    end
+        
+    if ArrayMax > DistMax %Saves only the longest distance. 
+        DistMax = ArrayMax ;
+    end
+    q = q+1; %Counter
+end %Finds the max ORF distance
+
+if DistMax >= 50 %finds the number of distances > than 50bp
+    probmat = probmat+1;
+end
+
+end %Determins the probablity of an ORF > 50bp.
+
+Probability = probmat/RunNumber;
+
+disp ('Terminated Analysis') %Aids in reading Command window runs.
+%%
 %part 5: Make sure your results from part 4 are sensible. What features
 % must this curve have (hint: what should be the value when N is small or when
 % N is very large? how should the curve change in between?) Make sure your
