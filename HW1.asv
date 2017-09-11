@@ -105,7 +105,7 @@ disp ('Terminated Analysis') %Aids in reading Command window runs.
 % runs 1000 times. Use this to determine the probability
 % that an sequence of length 500 has an ORF of greater than 50 b.p.
 clear all
-RunNumber = 1000000;
+RunNumber = 1000;
 probmat = 0;
 
 for z = 1:RunNumber
@@ -182,11 +182,11 @@ disp ('Terminated Analysis') %Aids in reading Command window runs.
 clear all
 RunNumber = 1000;
 probmat = 0;
-N = 10000; % define sequence length
+N = 1000; % define sequence length
 
 for iii = 1:N
+    
 for z = 1:RunNumber
-    e
 randNum_seq = randi(4,[1,N]); %generates an array of numbers 1-4.
 %this will correspond to each of the 4 nucleotide bases.
 
@@ -245,8 +245,12 @@ if DistMax >= 50 %finds the number of distances > than 50bp
 end
 
 end %Determins the probablity of an ORF > 50bp.
-
 Probability = probmat/RunNumber;
+
+plot(1:N,Probability,
+hold on
+
+end
 
 disp ('Terminated Analysis') %Aids in reading Command window runs.
 %%

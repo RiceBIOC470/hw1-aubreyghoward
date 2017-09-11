@@ -182,7 +182,7 @@ disp ('Terminated Analysis') %Aids in reading Command window runs.
 clear all
 RunNumber = 1000;
 probmat = 0;
-N = 10000; % define sequence length
+N = 1000; % define sequence length
 
 for iii = 1:N
     
@@ -248,8 +248,10 @@ end %Determins the probablity of an ORF > 50bp.
 Probability = probmat/RunNumber;
 
 plot(1:N,Probability)
+hold on
 
 end
+
 disp ('Terminated Analysis') %Aids in reading Command window runs.
 %%
 %part 5: Make sure your results from part 4 are sensible. What features
