@@ -326,6 +326,20 @@ disp('Terminated Analysis')
 % CpN0 and CpNX are the same quantitites for the normalization gene.
 % Plot this data in an appropriate way. 
 
+q = 1;
+p = 1;
+for ii = 1:6 %takes the average for every gene(3 columns) per condition (rows).
+    for iii = 1:4
+    avg_well(ii,p) = mean(wellplate(ii,q:q+2))
+    p = p+1;
+    q = q+2;
+    end
+    q = 1;
+    p = 1;
+end
+
+function 
+
 
 
 %% Challenge problems that extend the above (optional)

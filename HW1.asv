@@ -261,7 +261,7 @@ disp ('Terminated Analysis') %Aids in reading Command window runs.
 % plot looks like this. 
 
 %I believe that there should be a linear relationship between the number of
-%or
+%ORFs > 50bp and the size of the sequence. This is reflected in my plot.
 
 %% problem 3 data input/output and simple analysis
 
@@ -325,6 +325,16 @@ disp('Terminated Analysis')
 % the gene in the 1st condition, CpX is the value of Cp in condition X and
 % CpN0 and CpNX are the same quantitites for the normalization gene.
 % Plot this data in an appropriate way. 
+
+q = 1;
+p = 1;
+for ii = 1:6 %makes rows 1-6 of 12 columns
+    avg_well(ii,p) = mean(wellplate(ii
+    p = p+1;
+    q = q+12;
+end
+
+
 
 
 %% Challenge problems that extend the above (optional)
