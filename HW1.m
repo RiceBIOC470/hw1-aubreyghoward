@@ -55,7 +55,7 @@ while ii < N
 end
 disp(rand_seq)
 disp ('Terminated Analysis')%Aids in reading Command window runs.
-%%
+
 
 %part 2: open reading frames (ORFs) are pieces of DNA that can be
 % transcribed and translated. They start with a start codon (ATG) and end with a
@@ -141,7 +141,7 @@ Stop = [Stop1,Stop2,Stop3]; Stop = sort(Stop);%stop codon listed in numerical or
 
 q = 1;
 DistMax = -1;
-
+ArrayMax = 0;
 while q<=length(Start)
     checkdist = Stop-Start(1,q); %checks distance between every stop and 1 element of start
     p = 1;
@@ -182,7 +182,7 @@ disp ('Terminated Analysis') %Aids in reading Command window runs.
 clear all
 RunNumber = 1000;
 probmat = 0;
-N = 1000; % define sequence length
+N = 58; % define sequence length
 
 w = 1;
 for iii = 1:N
@@ -218,7 +218,7 @@ Stop = [Stop1,Stop2,Stop3]; Stop = sort(Stop);%stop codon listed in numerical or
 
 q = 1;
 DistMax = -1;
-
+ArrayMax = 0;
 while q<=length(Start)
     checkdist = Stop-Start(1,q); %checks distance between every stop and 1 element of start
     p = 1;
@@ -254,7 +254,6 @@ end
 plot(Probability)
 disp ('Terminated Analysis') %Aids in reading Command window runs.
 
-%%
 %part 5: Make sure your results from part 4 are sensible. What features
 % must this curve have (hint: what should be the value when N is small or when
 % N is very large? how should the curve change in between?) Make sure your
@@ -326,19 +325,21 @@ disp('Terminated Analysis')
 % CpN0 and CpNX are the same quantitites for the normalization gene.
 % Plot this data in an appropriate way. 
 
-q = 1;
-p = 1;
-for ii = 1:6 %takes the average for every gene(3 columns) per condition (rows).
-    for iii = 1:4
-    avg_well(ii,p) = mean(wellplate(ii,q:q+2))
-    p = p+1;
-    q = q+2;
-    end
-    q = 1;
-    p = 1;
+qq = 1
+pp = 1
+for ix = 1:6
+    y(pp,:) = 2.^(wellplate (1,1:9)- wellplate(qq,1:9))
+    diff_mat(pp,:) = wellplate (1,10:12)-wellplate(qq,10:12)
+    qq = qq+1;
+    pp = pp+1;
 end
 
-function 
+nextcol = 1;
+
+    for iiix = 1:3
+    final_mat(:,nextcol) = y(:,nextcol)- diff_mat(:,nextcol)
+    nextcol = nextcol+3;
+    end
 
 
 
