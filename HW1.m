@@ -184,6 +184,7 @@ RunNumber = 1000;
 probmat = 0;
 N = 1000; % define sequence length
 
+w = 1;
 for iii = 1:N
     
 for z = 1:RunNumber
@@ -245,13 +246,12 @@ if DistMax >= 50 %finds the number of distances > than 50bp
 end
 
 end %Determins the probablity of an ORF > 50bp.
-Probability = probmat/RunNumber;
+Probability (w,:) = probmat/RunNumber;
 
-plot(1:N,Probability)
-hold on
+w=w+1
 
 end
-
+plot(Probability)
 disp ('Terminated Analysis') %Aids in reading Command window runs.
 
 %%
@@ -259,6 +259,9 @@ disp ('Terminated Analysis') %Aids in reading Command window runs.
 % must this curve have (hint: what should be the value when N is small or when
 % N is very large? how should the curve change in between?) Make sure your
 % plot looks like this. 
+
+%I believe that there should be a linear relationship between the number of
+%ORFs > 50bp and the size of the sequence. This is reflected in my plot.
 
 %% problem 3 data input/output and simple analysis
 
@@ -322,6 +325,7 @@ disp('Terminated Analysis')
 % the gene in the 1st condition, CpX is the value of Cp in condition X and
 % CpN0 and CpNX are the same quantitites for the normalization gene.
 % Plot this data in an appropriate way. 
+
 
 
 %% Challenge problems that extend the above (optional)

@@ -184,6 +184,7 @@ RunNumber = 1000;
 probmat = 0;
 N = 1000; % define sequence length
 
+w = 1;
 for iii = 1:N
     
 for z = 1:RunNumber
@@ -245,13 +246,12 @@ if DistMax >= 50 %finds the number of distances > than 50bp
 end
 
 end %Determins the probablity of an ORF > 50bp.
-Probability = probmat/RunNumber;
+Probability (w,:) = probmat/RunNumber;
 
-plot(1:N,Probability)
-hold on
+w=w+1
 
 end
-
+plot(Probability)
 disp ('Terminated Analysis') %Aids in reading Command window runs.
 
 %%
@@ -259,6 +259,9 @@ disp ('Terminated Analysis') %Aids in reading Command window runs.
 % must this curve have (hint: what should be the value when N is small or when
 % N is very large? how should the curve change in between?) Make sure your
 % plot looks like this. 
+
+%I believe that there should be a linear relationship between the number of
+%or
 
 %% problem 3 data input/output and simple analysis
 
@@ -295,21 +298,23 @@ while line1 ~= -1
 end
 
 num_mat = [str_mat(:,3),str_mat(:,6)]
-%%
+
 
 % Part 2: transform this vector into an array representing the layout of
 % the plate. e.g. a 6 row, 12 column array should that data(1,1) = Cp from
 % A1, data(1,2) = Cp from A2, data(2,1) = Cp from B1 etc.
 
-num_mat = num_mat'
-q = 1
+num_mat = num_mat';
+q = 1;
 p = 1;
-for ii = 1:6
-    wellplate = num_mat(p,q:q+12)
-    p = p+1
+for ii = 1:6 %makes rows 1-6 of 12 columns
+    wellplate(ii,:) = num_mat(2,q:q+11)
+    p = p+1;
     q = q+12;
 end
-
+size(wellplate)%checks array size
+wellplate = cellfun(@str2num,wellplate)%changes array data type to num.
+disp('Terminated Analysis')
 
 % Part 3. The 4th gene in columns 10 - 12 is known as a normalization gene.
 % That is, it's should not change between conditions and it is used to normalize 
