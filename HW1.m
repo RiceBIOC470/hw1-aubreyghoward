@@ -276,30 +276,42 @@ disp ('Terminated Analysis') %Aids in reading Command window runs.
 clear all
 
 fid = fopen('qPCRdata.txt', 'r');
-line1 = fgetl(fid);
-line1 = fgetl(fid);
 
-q = 1;
-str_mat = [1,1];
-
-while line1 ~= -1
-    var1 = strsplit(line1," ");
-    lengthofmat = [1,length(var1)];
-    %if lengthofmat == str_mat(q,:)
-      %  str_mat(q,:)= var1
-      %%  line1 = fgetl(fid);
-        %q = q+1
-  %  else
-     %   break
-        
-   % end
+countline = 3;
+for i = 1:countline
+line1 = fgetl(fid);
 end
 
+q = 1;
+stopline = 'G1';
+while line1 ~= -1
+    var1 = strsplit(line1);
+    str_mat(q,:) = var1;
+    if strcmp(str_mat(q,5),'72')
+        break
+    end
+    line1 = fgetl(fid);
+    q = q+1;
+end
+
+num_mat = [str_mat(:,3),str_mat(:,6)]
 
 
 % Part 2: transform this vector into an array representing the layout of
 % the plate. e.g. a 6 row, 12 column array should that data(1,1) = Cp from
-% A1, data(1,2) = Cp from A2, data(2,1) = Cp from B1 etc. 
+% A1, data(1,2) = Cp from A2, data(2,1) = Cp from B1 etc.
+
+num_mat = num_mat';
+q = 1;
+p = 1;
+for ii = 1:6 %makes rows 1-6 of 12 columns
+    wellplate(ii,:) = num_mat(2,q:q+11)
+    p = p+1;
+    q = q+12;
+end
+size(wellplate)%checks array size
+wellplate = cellfun(@str2num,wellplate)%changes array data type to num.
+disp('Terminated Analysis')
 
 % Part 3. The 4th gene in columns 10 - 12 is known as a normalization gene.
 % That is, it's should not change between conditions and it is used to normalize 
