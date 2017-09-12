@@ -325,22 +325,41 @@ disp('Terminated Analysis')
 % CpN0 and CpNX are the same quantitites for the normalization gene.
 % Plot this data in an appropriate way. 
 
-qq = 1
-pp = 1
-for ix = 1:6
-    y(pp,:) = 2.^(wellplate (1,1:9)- wellplate(qq,1:9))
-    diff_mat(pp,:) = wellplate (1,10:12)-wellplate(qq,10:12)
+qq = 1;
+pp = 1;
+for ix = 1:6 %gets two matricies. one is the diff of each row to row 1
+             %the other is the diff of each normilazed gene to row 1.
+    y(pp,:) = (wellplate (1,1:9)- wellplate(qq,1:9));
+    diff_mat(pp,:) = wellplate (1,10:12)-wellplate(qq,10:12);
     qq = qq+1;
     pp = pp+1;
 end
 
+p = 1;
 nextcol = 1;
-
-    for iiix = 1:3
-    final_mat(:,nextcol) = y(:,nextcol)- diff_mat(:,nextcol)
+for iix = 1:3%normalization final step
+        for iiix = 1:3
+    final_mat(:,nextcol) = 2.^(y(:,nextcol)- diff_mat(:,p));
     nextcol = nextcol+3;
     end
+    p = p+1;
+    nextcol = p;
+end
+final_mat
 
+q = 1;
+p = 1;
+for ii = 1:6 %takes the average for every gene(3 columns) per condition (rows).
+    for iii = 1:4
+    avg_well(ii,p) = mean(final_mat(ii,q:q+2))
+    p = p+1;
+    q = q+2;
+    end
+    q = 1;
+    p = 1;
+end
+
+plot(avg_well)%this is a plot of average gene upregulation (in fold increase) per each condition.
 
 
 %% Challenge problems that extend the above (optional)
