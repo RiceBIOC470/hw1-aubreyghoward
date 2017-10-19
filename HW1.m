@@ -1,3 +1,18 @@
+GB comments:
+Prob1: 100%
+Prob2:
+P1:100
+P2: 50, does not check to ensure sequence is inframe
+P3:100
+P4:75 Much of the code is ok, but the outputis incorrect
+P5:0 Relationship isn’t linear, its sigmoidal. 
+Prob3
+P1: 100
+P2:100
+P3:25, incorrect choice in plot with no labels. 
+Overall: 81
+
+
 % Homework 1. Due before class on 9/5/17
 
 %% Problem 1 - addition with strings
